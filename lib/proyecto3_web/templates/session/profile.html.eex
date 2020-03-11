@@ -1,0 +1,20 @@
+<h1>Show User</h1>
+
+<ul>
+
+  <li>
+    <strong>Username:</strong>
+    <%= @user.username %>
+  </li>
+
+  <li>
+    <strong>Password:</strong>
+    <%= @user.password %>
+  </li>
+
+  <li>
+    <strong>Image:</strong>
+    <img src="<%= @user.link %>" alt="Perfil" height="300px" width="400px">
+  </li>
+
+</ul>

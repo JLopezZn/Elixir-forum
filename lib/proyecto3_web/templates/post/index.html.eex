@@ -1,0 +1,28 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<h1>Conspiracy Theories</h1>
+
+<%= if signed_in?(@conn) do %>
+<span><%= link "New Post", to: Routes.post_path(@conn, :new) %></span>
+<% end %>
+
+
+<div class="display: block">
+    <%= for post <- @posts do %>
+    <div class="card" style="width: 18rem; float: left; margin: 10px;">
+      <img class="card-img-top" src="https://us.123rf.com/450wm/sanek13744/sanek137441703/sanek13744170300788/74467907-pensamiento-burbuja-sobre-fondo-negro-dise%C3%B1o-infogr%C3%A1fico.jpg?ver=6" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title" style="color:black;"><%= post.user %></h5>
+        <p class="card-text"  style="color:black;"><%= post.body %></p>
+        <%= if signed_in?(@conn) && Plug.Conn.get_session(@conn, :current_username) == post.user do %>
+          <span><%= link "Edit", to: Routes.post_path(@conn, :edit, post) %></span>
+          <span><%= link "Delete", to: Routes.post_path(@conn, :delete, post), method: :delete, data: [confirm: "Are you sure?"] %></span>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+</div>
+
+

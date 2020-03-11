@@ -1,0 +1,36 @@
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">Thoughts</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto" >
+      <li class="nav-item" >
+        <a class="nav-link"><%= link "Posts", to: Routes.post_path(@conn, :index) %></a>     
+      </li>
+      
+      <li class="nav-item">
+        <a class="nav-link" >
+        <%= if signed_in?(@conn) do %>
+          <%= link "Cerrar Sesión", to: Routes.session_path(@conn, :delete), method: :delete%> 
+        <% else %>
+          <%= link "Iniciar Sesión", to: Routes.session_path(@conn, :new) %>
+          |
+          <%= link "Registrarse", to: Routes.user_path(@conn, :new) %>
+        <% end %>
+        </a>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <%= if signed_in?(@conn) do %>
+        <img src="<%= Plug.Conn.get_session(@conn, :current_img) %>" alt="Img" height="42" width="42" style="border-radius: 1000px;">
+        <h1 class="navbar-brand" style="margin-left: 10px;"><%= Plug.Conn.get_session(@conn, :current_username) %></h1>
+      <% end %>
+    </form>
+  </div>
+</nav>
+<br><br>

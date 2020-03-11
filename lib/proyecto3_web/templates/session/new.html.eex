@@ -1,0 +1,8 @@
+<h1>Iniciar Sesión</h1>
+<%= form_for @conn, Routes.session_path(@conn, :new), [as: :session], fn f -> %>
+  <%= label f, :Usuario %>
+  <%= text_input f, :username, placeholder: "Usuario" %><br><br>
+  <%= label f, :Contraseña %>
+  <%= password_input f, :password, placeholder: "Contraseña" %><br><br>
+  <%= submit "Iniciar Sesión" %>
+<% end %>
